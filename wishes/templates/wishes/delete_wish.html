@@ -1,0 +1,12 @@
+{% extends 'wishes/base.html' %}
+
+{% block content %}
+    <section id="delete-wish">
+        <form method="POST" action="{% url 'wishes:delete_wish' wish.id %}">
+            {% csrf_token %}
+            <p>Are you sure you want to delete "{{ wish.content }}" ?</p>
+            <button type="submit">Yes</button>
+            <a href="{% url 'wishes:index' %}">No</a>
+        </form>
+    </section>
+{% endblock content %}

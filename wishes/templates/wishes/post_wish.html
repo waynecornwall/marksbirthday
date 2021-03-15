@@ -1,0 +1,16 @@
+{% extends 'wishes/base.html' %}
+
+{% block content %}
+    <section id="post-wish">
+        {% if user.username != 'mark' %}
+            <p>Send Mark a wish</p>
+        {% else %}
+            <p>Send a response</p>
+        {% endif %}
+        <form method="POST" action="{% url 'wishes:post_wish' %}">
+            {% csrf_token %}
+            {{ form.content }}
+            <button type="submit">Send</button>
+        </form>
+    </section>
+{% endblock content %}

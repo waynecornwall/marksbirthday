@@ -1,0 +1,20 @@
+{% extends 'wishes/base.html' %}
+
+{% block content %}
+    <section id="login">
+        {% if form.errors %}
+            <p class="hidden-message">Username and password does not match. Please try again</p>
+        {% endif %}
+        <h3 class="center">Log in</h3>
+        <form method="POST" action="{% url 'users:login' %}">
+            {% csrf_token %}
+            <p>Username</p>
+            {{ form.username }}
+            <p>Password</p>
+            {{ form.password }}
+            <button type="submit">Log in</button>
+            <input type="hidden" name="next" value="{% url 'wishes:index' %}">
+        </form>
+        <p class="center">Not a member? <a href="{% url 'users:register' %}">Register</a></p>
+    </section>
+{% endblock content %}

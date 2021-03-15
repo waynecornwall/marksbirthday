@@ -1,0 +1,43 @@
+{% extends 'wishes/base.html' %}
+
+{% block content %}
+    <section id="homepage">
+
+        {% if user.username != 'mark' %}
+            {% if user_wish_count == 0 %}
+                <p class="center">Hey {{ user.username.title }} | <a href="{% url 'wishes:post_wish' %}">Send a wish</a></p>
+                <p class="hidden-message">You haven't sent Mark a wish yet</p>
+            {% else %}
+                <p class="center">Hey {{ user.username.title }} | <a href="{% url 'wishes:post_wish' %}">Send another wish</a></p>
+            {% endif %}
+        {% else %}
+            <p class="center">Hey Birthday Boy | <a href="{% url 'wishes:post_wish' %}">Respond to your wishes</a></p>
+        {% endif %}
+
+
+        <div class="wrapper">
+            {% for wish in wishes %}
+                {% if wish.sender.username != 'mark' %}
+                    <div class="wish">
+                        <p>" <span class="red">{{ wish.content }}</span> " - <small>{{ wish.sender.username.title }}</small></p>
+                        {% if user == wish.sender %}
+                            <a href="{% url 'wishes:edit_wish' wish.id %}">edit</a>
+                            <a href="{% url 'wishes:delete_wish' wish.id %}">delete</a>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <div class="wish">
+                        <p>" <span class="blue">{{ wish.content }}</span> " -
+                            <small>Birthday Boy</small></p>
+                        {% if user == wish.sender %}
+                            <a href="{% url 'wishes:edit_wish' wish.id %}">edit</a>
+                            <a href="{% url 'wishes:delete_wish' wish.id %}">delete</a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                <hr/>
+            {% endfor %}
+
+        </div>
+    </section>
+{% endblock content %}
