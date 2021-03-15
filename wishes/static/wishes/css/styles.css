@@ -102,6 +102,10 @@ textarea, input {
     padding: 5px;
 }
 
+#unavailable p {
+    text-align: center;
+}
+
 #post-wish button, #edit-wish button {
     display: block;
     margin: 10px auto;
