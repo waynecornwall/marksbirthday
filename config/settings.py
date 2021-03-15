@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 from environs import Env
 import os
+import django_heroku
 
 env = Env()
 env.read_env()
@@ -128,3 +129,5 @@ STATIC_URL = '/static/'
 
 
 LOGIN_URL = 'users:login'
+
+django_heroku.settings(locals())
